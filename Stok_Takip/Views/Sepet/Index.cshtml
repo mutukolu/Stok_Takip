@@ -1,0 +1,140 @@
+﻿@model  List<Stok_Takip.Models.Entity.Sepet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+@{
+    ViewBag.Title = "Sepet";
+}
+
+@{
+    var stokUyarisi = TempData["StokUyarisi"];
+
+}
+<h2 class="container">@User.Identity.Name</h2>
+<h3 class="container">Sepetim</h3>
+@if (TempData["mesaj"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["mesaj"]
+    </div>
+}
+@if (stokUyarisi != null)
+{
+    <div class="alert alert-warning">
+        @stokUyarisi
+    </div>
+}
+<table class="table table-bordered" id="Sepet">
+    <thead style="background-color:aliceblue">
+        <tr>
+            <th>Ürün Bilgisi</th>
+            <th>Stok Sayısı</th>
+            <th>Fiyat</th>
+            <th>Miktarı</th>
+            <th>Toplam Fiyatı</th>
+            <th>Tarih</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ürünler.Kategoriler.Kategori - @item.Ürünler.Markalar.Markalar1 - @item.Ürünler.BarkodNo - @item.Ürünler.UrunAdı</td>
+                <td>@Html.DisplayFor(x => item.Ürünler.Miktarı)</td>
+                <td>@item.Ürünler.SatisFiyat</td>
+                <td>
+                    <div>
+                        @Html.ActionLink("-", "Azalt", new { id = item.ID }, new { @class = "btn btn-secondary btn-sm azalt" })
+                    </div>
+
+                    @Html.TextBoxFor(x => item.BirimMiktar, new { @class = "txt", data_id = item.ID })
+
+                    <div>
+                        @Html.ActionLink("+", "Arttir", new { id = item.ID }, new { @class = "btn btn-info btn-sm arttir" })
+                    </div>
+                </td>
+
+                <td>@item.ToplamFiyat</td>
+                <td>@item.Tarih.ToString("d.MM.yyyy")</td>
+                <td>@Html.ActionLink("Sil", "Sil", new { id = item.ID }, new { @class = "btn btn-danger btnSil" })</td>
+                <td>@Html.ActionLink("Satın Al", "SatinAl", "Satislar", new { id = item.ID }, new { @class = "btn btn-info" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="container">
+    @ViewBag.Tutar
+</div>
+
+<br />
+<br />
+
+<div class="container form-group">
+    @Html.ActionLink("Hepsini Satın Al", "HepsiniSatinAl", "Satislar", null, new { @class = "btn btn-primary form-control" })
+</div>
+<br />
+<br />
+<div class="container form-group">
+    @Html.ActionLink("Hepsini Sil", "HepsiniSil", null, new { @class = "btn btn-danger form-control" })
+</div>
+
+<style>
+    .text {
+        line-height: 8px;
+        width: 30px !important;
+        height: 32px;
+        font-size: 20px;
+        text-align: center;
+        border: solid 1px #ccc;
+        margin-left: 23px;
+    }
+
+    .arttir {
+        display: block;
+        cursor: pointer;
+        border: solid 1px #ccc;
+        height: 32px;
+        position: absolute;
+        margin-left: 161.5px;
+        margin-top: -31px;
+        min-width: 5px;
+    }
+
+    .azalt {
+        display: block;
+        cursor: pointer;
+        border: solid 1px #ccc;
+        height: 32px;
+        position: absolute;
+        margin-left: 133.5px;
+        margin-top: -1px;
+        min-width: 27px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script>
+    $(function () {
+        $('.txt').on('change', function () {
+            var miktar = $(this).val();
+            var sepetid = $(this).attr('data-id');
+            $.ajax({
+                url: '/Sepet/DinamikMiktar/',
+                data: { id: sepetid, miktari: miktar },
+                success: function (res) {
+                    document.location.reload();
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+

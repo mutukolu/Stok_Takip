@@ -1,0 +1,37 @@
+﻿@model  Stok_Takip.Models.Entity.Markalar
+@{
+    ViewBag.Title = "GüncelleBilgiGetir";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<h2>Marka Güncelleme Sayfası</h2>
+<div class="container">
+    @using (Html.BeginForm("Guncelle", "Markalar", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.ID)
+        <div class="form-group">
+            @Html.LabelFor(x => x.Kategoriler.Kategori)
+            @Html.DropDownListFor(x => x.KategoriID, (List<SelectListItem>)ViewBag.l, "seçininiz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.KategoriID, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Markalar1)
+            @Html.TextBoxFor(x => x.Markalar1, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Markalar1, null, new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Aciklama)
+            @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Aciklama, null, new { @class = "text-danger" })
+        </div>
+        <div><button class="btn btn-warning">Marka Güncelle</button> </div>
+    }
+</div>
+@section danger
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+

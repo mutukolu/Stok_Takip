@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a3e117f6f594d8690d1c54c3a11f4f3" Name="Diagram1">
+        <EntityTypeShape EntityType="Stok_TakipModel.Birimler" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stok_TakipModel.Kullanıcılar" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stok_TakipModel.KullaniciRolleri" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stok_TakipModel.Müşteri" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stok_TakipModel.Roller" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stok_TakipModel.Sepet" Width="1.5" PointX="10.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Stok_TakipModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="Stok_TakipModel.FK_KullaniciRolleri_Kullanıcılar" ManuallyRouted="false" />
+        <AssociationConnector Association="Stok_TakipModel.FK_Sepet_Kullanıcılar1" ManuallyRouted="false" />
+        <AssociationConnector Association="Stok_TakipModel.FK_KullaniciRolleri_Roller" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Stok_TakipModel.Kategoriler" Width="1.5" PointX="10.375" PointY="11.25" />
+        <EntityTypeShape EntityType="Stok_TakipModel.Markalar" Width="1.5" PointX="12.625" PointY="11.125" />
+        <EntityTypeShape EntityType="Stok_TakipModel.Ürünler" Width="1.5" PointX="14.875" PointY="6.25" />
+        <AssociationConnector Association="Stok_TakipModel.FK_Ürünler_Birimler" />
+        <AssociationConnector Association="Stok_TakipModel.FK_Markalar_Kategoriler" />
+        <AssociationConnector Association="Stok_TakipModel.FK_Ürünler_Kategoriler" />
+        <AssociationConnector Association="Stok_TakipModel.FK_Ürünler_Markalar" />
+        <AssociationConnector Association="Stok_TakipModel.FK_Sepet_Ürünler" />
+        <EntityTypeShape EntityType="Stok_TakipModel.Satislar" Width="1.5" PointX="17.125" PointY="3.75" />
+        <AssociationConnector Association="Stok_TakipModel.FK_Satislar_Kullanıcılar" />
+        <AssociationConnector Association="Stok_TakipModel.FK_Satislar_Ürünler" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

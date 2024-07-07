@@ -1,0 +1,41 @@
+﻿@model List<Stok_Takip.Models.Entity.Satislar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+
+<h2>Satışı Yapılan Ürünler</h2>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Kullanıcı Ad Soyad</th>
+        <th>Ürün Adı</th>
+        <th>Barkod No</th>
+        <th>Birim Fiyatı</th>
+        <th>Miktarı</th>
+        <th>Toplam Fiyatı</th>
+        <th>KDV</th>
+        <th>Birimi</th>
+        <th>Tarih & Saat</th>
+       
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(x => item.kullanıcıID)</td>
+            <td>@Html.DisplayFor(x => item.Kullanıcılar.AdiSoyadi)</td>
+            <td>@Html.DisplayFor(x => item.Ürünler.UrunAdı)</td>
+            <td>@Html.DisplayFor(x => item.BarkodNo)</td>
+            <td>@Html.DisplayFor(x => item.BirimFiyat)</td>
+            <td>@Html.DisplayFor(x => item.BirimMiktar)</td>
+            <td>@Html.DisplayFor(x => item.ToplamFiyat)</td>
+            <td>@Html.DisplayFor(x => item.KDV)</td>
+            <td>@Html.DisplayFor(x => item.Ürünler.Birimler.Birim)</td>            
+            <td>@Html.DisplayFor(x => item.Saat)</td>
+
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,69 @@
+﻿@using Stok_Takip.Models.Entity
+@model List<Sepet>
+@{
+    ViewBag.Title = "HepsiniSatinAl";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<div class="container">
+    <div class="container">
+        @{ 
+            Stok_TakipEntities db = new Stok_TakipEntities();
+            var kullanıcıadı = User.Identity.Name;
+            var model = db.Kullanıcılar.FirstOrDefault(x => x.KullanıcıAdi == kullanıcıadı);
+            var adsoyad = model.AdiSoyadi;
+        }
+        <h3>Merhaba Sayın @adsoyad Satın Alma Sayfasına Hoşgeldiniz</h3>
+        <hr />
+    </div>
+</div>
+
+    @using (Html.BeginForm("HepsiniSatinAl2","Satislar", FormMethod.Post, new { @class = "container" }))
+    {
+        foreach (var item in Model)
+        {
+          <div class="form-group">
+              <div class="form-group">
+                  <h3> ID : @Html.DisplayFor(x => item.ID)</h3>
+              </div>
+
+              <div class="form-group">
+                  Ürün Adı : @Html.DisplayFor(x => item.Ürünler.UrunAdı)
+              </div>
+
+              <div class="form-group">
+                  Barkod No : @Html.DisplayFor(x => item.Ürünler.BarkodNo)
+              </div>
+
+              <div class="form-group">
+                  Miktarı : @Html.DisplayFor(x => item.BirimMiktar)
+              </div>
+
+              <div class="form-group">
+                  Birimi : @Html.DisplayFor(x => item.Ürünler.Birimler.Birim)
+              </div>
+
+              <div class="form-group">
+                  Fiyatı : @Html.DisplayFor(x => item.Ürünler.SatisFiyat)
+              </div>
+
+              <div class="form-group">
+                  <h3 class="text-danger"> Toplam Fiyat : @Html.DisplayFor(x => item.ToplamFiyat)</h3>
+              </div>
+              <hr />
+          </div>
+        }
+
+     <div class="container">
+         <div><h2 class="text-danger text-center">@ViewBag.Tutar</h2></div>
+         <div class="form-group" style="float:left">
+             <button class="byn btn-success">Satın Al</button>
+         </div>
+         <div>
+             <a href="/Sepet/Index" class="btn btn-dark" style="float:right">İptal</a>
+         </div>
+     </div>
+
+  
+
+ }

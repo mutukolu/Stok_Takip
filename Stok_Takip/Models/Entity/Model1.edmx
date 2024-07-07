@@ -1,0 +1,805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Stok_TakipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Birimler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Birim" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kategori" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanıcılar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="KullanıcıAdi" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sifre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdiSoyadi" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Adres" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Tarih" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KullaniciRolleri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" Nullable="false" />
+          <Property Name="RolID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Markalar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriID" Type="int" Nullable="false" />
+          <Property Name="Markalar1" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Müşteri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdSoyad" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Adres" Type="varchar" MaxLength="500" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+          <Property Name="Resim" Type="varchar" MaxLength="500" />
+          <Property Name="KayıtTarihi" Type="date" />
+          <Property Name="Puani" Type="decimal" Precision="28" Scale="2" />
+          <Property Name="Aciklama" Type="varbinary" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Roller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Satislar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanıcıID" Type="int" Nullable="false" />
+          <Property Name="UrunID" Type="int" />
+          <Property Name="SepetID" Type="int" Nullable="false" />
+          <Property Name="BarkodNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BirimFiyat" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="BirimMiktar" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="ToplamFiyat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="KDV" Type="int" Nullable="false" />
+          <Property Name="BirimID" Type="int" Nullable="false" />
+          <Property Name="Tarih" Type="date" Nullable="false" />
+          <Property Name="Saat" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sepet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunID" Type="int" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" Nullable="false" />
+          <Property Name="AlisFiyat" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="BirimMiktar" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="ToplamFiyat" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="Tarih" Type="date" Nullable="false" />
+          <Property Name="Saat" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ürünler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriID" Type="int" Nullable="false" />
+          <Property Name="MarkaID" Type="int" Nullable="false" />
+          <Property Name="BarkodNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UrunAdı" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="AlisFiyat" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="SatisFiyat" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="Miktarı" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="KDV" Type="int" Nullable="false" />
+          <Property Name="BirimID" Type="int" Nullable="false" />
+          <Property Name="Tarih" Type="date" Nullable="false" />
+          <Property Name="Aciklama" Type="varchar" MaxLength="850" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_KullaniciRolleri_Kullanıcılar">
+          <End Role="Kullanıcılar" Type="Self.Kullanıcılar" Multiplicity="1" />
+          <End Role="KullaniciRolleri" Type="Self.KullaniciRolleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanıcılar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciRolleri">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciRolleri_Roller">
+          <End Role="Roller" Type="Self.Roller" Multiplicity="1" />
+          <End Role="KullaniciRolleri" Type="Self.KullaniciRolleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roller">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KullaniciRolleri">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Markalar_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Markalar" Type="Self.Markalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Markalar">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Satislar_Kullanıcılar">
+          <End Role="Kullanıcılar" Type="Self.Kullanıcılar" Multiplicity="1" />
+          <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanıcılar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Satislar">
+              <PropertyRef Name="kullanıcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Satislar_Ürünler">
+          <End Role="Ürünler" Type="Self.Ürünler" Multiplicity="0..1" />
+          <End Role="Satislar" Type="Self.Satislar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ürünler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Satislar">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Kullanıcılar1">
+          <End Role="Kullanıcılar" Type="Self.Kullanıcılar" Multiplicity="1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanıcılar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Ürünler">
+          <End Role="Ürünler" Type="Self.Ürünler" Multiplicity="1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ürünler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ürünler_Birimler">
+          <End Role="Birimler" Type="Self.Birimler" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ürünler" Type="Self.Ürünler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birimler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ürünler">
+              <PropertyRef Name="BirimID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ürünler_Kategoriler">
+          <End Role="Kategoriler" Type="Self.Kategoriler" Multiplicity="1" />
+          <End Role="Ürünler" Type="Self.Ürünler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ürünler">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ürünler_Markalar">
+          <End Role="Markalar" Type="Self.Markalar" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ürünler" Type="Self.Ürünler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markalar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ürünler">
+              <PropertyRef Name="MarkaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Stok_TakipModelStoreContainer">
+          <EntitySet Name="Birimler" EntityType="Self.Birimler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategoriler" EntityType="Self.Kategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanıcılar" EntityType="Self.Kullanıcılar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciRolleri" EntityType="Self.KullaniciRolleri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Markalar" EntityType="Self.Markalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Müşteri" EntityType="Self.Müşteri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roller" EntityType="Self.Roller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Satislar" EntityType="Self.Satislar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ürünler" EntityType="Self.Ürünler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_KullaniciRolleri_Kullanıcılar" Association="Self.FK_KullaniciRolleri_Kullanıcılar">
+            <End Role="Kullanıcılar" EntitySet="Kullanıcılar" />
+            <End Role="KullaniciRolleri" EntitySet="KullaniciRolleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciRolleri_Roller" Association="Self.FK_KullaniciRolleri_Roller">
+            <End Role="Roller" EntitySet="Roller" />
+            <End Role="KullaniciRolleri" EntitySet="KullaniciRolleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Markalar_Kategoriler" Association="Self.FK_Markalar_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Markalar" EntitySet="Markalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Satislar_Kullanıcılar" Association="Self.FK_Satislar_Kullanıcılar">
+            <End Role="Kullanıcılar" EntitySet="Kullanıcılar" />
+            <End Role="Satislar" EntitySet="Satislar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Satislar_Ürünler" Association="Self.FK_Satislar_Ürünler">
+            <End Role="Ürünler" EntitySet="Ürünler" />
+            <End Role="Satislar" EntitySet="Satislar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Kullanıcılar1" Association="Self.FK_Sepet_Kullanıcılar1">
+            <End Role="Kullanıcılar" EntitySet="Kullanıcılar" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Ürünler" Association="Self.FK_Sepet_Ürünler">
+            <End Role="Ürünler" EntitySet="Ürünler" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ürünler_Birimler" Association="Self.FK_Ürünler_Birimler">
+            <End Role="Birimler" EntitySet="Birimler" />
+            <End Role="Ürünler" EntitySet="Ürünler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ürünler_Kategoriler" Association="Self.FK_Ürünler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Ürünler" EntitySet="Ürünler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ürünler_Markalar" Association="Self.FK_Ürünler_Markalar">
+            <End Role="Markalar" EntitySet="Markalar" />
+            <End Role="Ürünler" EntitySet="Ürünler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Stok_TakipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Birimler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Birim" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Aciklama" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Ürünler" Relationship="Stok_TakipModel.FK_Ürünler_Birimler" FromRole="Birimler" ToRole="Ürünler" />
+        </EntityType>
+        <EntityType Name="Kullanıcılar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="KullanıcıAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdiSoyadi" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="KullaniciRolleri" Relationship="Self.FK_KullaniciRolleri_Kullanıcılar" FromRole="Kullanıcılar" ToRole="KullaniciRolleri" />
+          <NavigationProperty Name="Sepet" Relationship="Self.FK_Sepet_Kullanıcılar1" FromRole="Kullanıcılar" ToRole="Sepet" />
+          <NavigationProperty Name="Satislar" Relationship="Stok_TakipModel.FK_Satislar_Kullanıcılar" FromRole="Kullanıcılar" ToRole="Satislar" />
+        </EntityType>
+        <EntityType Name="KullaniciRolleri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" />
+          <Property Name="RolID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kullanıcılar" Relationship="Self.FK_KullaniciRolleri_Kullanıcılar" FromRole="KullaniciRolleri" ToRole="Kullanıcılar" />
+          <NavigationProperty Name="Roller" Relationship="Self.FK_KullaniciRolleri_Roller" FromRole="KullaniciRolleri" ToRole="Roller" />
+        </EntityType>
+        <EntityType Name="Müşteri">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdSoyad" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Resim" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="KayıtTarihi" Type="DateTime" Precision="0" />
+          <Property Name="Puani" Type="Decimal" Precision="28" Scale="2" />
+          <Property Name="Aciklama" Type="Binary" MaxLength="500" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Roller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="KullaniciRolleri" Relationship="Self.FK_KullaniciRolleri_Roller" FromRole="Roller" ToRole="KullaniciRolleri" />
+        </EntityType>
+        <EntityType Name="Sepet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunID" Type="Int32" Nullable="false" />
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" />
+          <Property Name="AlisFiyat" Type="Decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="BirimMiktar" Type="Decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="ToplamFiyat" Type="Decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Saat" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Kullanıcılar" Relationship="Self.FK_Sepet_Kullanıcılar1" FromRole="Sepet" ToRole="Kullanıcılar" />
+          <NavigationProperty Name="Ürünler" Relationship="Stok_TakipModel.FK_Sepet_Ürünler" FromRole="Sepet" ToRole="Ürünler" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_KullaniciRolleri_Kullanıcılar">
+          <End Role="Kullanıcılar" Type="Self.Kullanıcılar" Multiplicity="1" />
+          <End Role="KullaniciRolleri" Type="Self.KullaniciRolleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanıcılar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KullaniciRolleri">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Kullanıcılar1">
+          <End Role="Kullanıcılar" Type="Self.Kullanıcılar" Multiplicity="1" />
+          <End Role="Sepet" Type="Self.Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanıcılar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KullaniciRolleri_Roller">
+          <End Role="Roller" Type="Self.Roller" Multiplicity="1" />
+          <End Role="KullaniciRolleri" Type="Self.KullaniciRolleri" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roller">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KullaniciRolleri">
+              <PropertyRef Name="RolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Stok_TakipEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Birimler" EntityType="Self.Birimler" />
+          <EntitySet Name="Kullanıcılar" EntityType="Self.Kullanıcılar" />
+          <EntitySet Name="KullaniciRolleri" EntityType="Self.KullaniciRolleri" />
+          <EntitySet Name="Müşteri" EntityType="Self.Müşteri" />
+          <EntitySet Name="Roller" EntityType="Self.Roller" />
+          <EntitySet Name="Sepet" EntityType="Self.Sepet" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_KullaniciRolleri_Kullanıcılar" Association="Self.FK_KullaniciRolleri_Kullanıcılar">
+            <End Role="Kullanıcılar" EntitySet="Kullanıcılar" />
+            <End Role="KullaniciRolleri" EntitySet="KullaniciRolleri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Kullanıcılar1" Association="Self.FK_Sepet_Kullanıcılar1">
+            <End Role="Kullanıcılar" EntitySet="Kullanıcılar" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KullaniciRolleri_Roller" Association="Self.FK_KullaniciRolleri_Roller">
+            <End Role="Roller" EntitySet="Roller" />
+            <End Role="KullaniciRolleri" EntitySet="KullaniciRolleri" />
+          </AssociationSet>
+          <EntitySet Name="Kategoriler" EntityType="Stok_TakipModel.Kategoriler" />
+          <EntitySet Name="Markalar" EntityType="Stok_TakipModel.Markalar" />
+          <EntitySet Name="Ürünler" EntityType="Stok_TakipModel.Ürünler" />
+          <AssociationSet Name="FK_Ürünler_Birimler" Association="Stok_TakipModel.FK_Ürünler_Birimler">
+            <End Role="Birimler" EntitySet="Birimler" />
+            <End Role="Ürünler" EntitySet="Ürünler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Markalar_Kategoriler" Association="Stok_TakipModel.FK_Markalar_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Markalar" EntitySet="Markalar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ürünler_Kategoriler" Association="Stok_TakipModel.FK_Ürünler_Kategoriler">
+            <End Role="Kategoriler" EntitySet="Kategoriler" />
+            <End Role="Ürünler" EntitySet="Ürünler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ürünler_Markalar" Association="Stok_TakipModel.FK_Ürünler_Markalar">
+            <End Role="Markalar" EntitySet="Markalar" />
+            <End Role="Ürünler" EntitySet="Ürünler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sepet_Ürünler" Association="Stok_TakipModel.FK_Sepet_Ürünler">
+            <End Role="Ürünler" EntitySet="Ürünler" />
+            <End Role="Sepet" EntitySet="Sepet" />
+          </AssociationSet>
+          <EntitySet Name="Satislar" EntityType="Stok_TakipModel.Satislar" />
+          <AssociationSet Name="FK_Satislar_Kullanıcılar" Association="Stok_TakipModel.FK_Satislar_Kullanıcılar">
+            <End Role="Kullanıcılar" EntitySet="Kullanıcılar" />
+            <End Role="Satislar" EntitySet="Satislar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Satislar_Ürünler" Association="Stok_TakipModel.FK_Satislar_Ürünler">
+            <End Role="Ürünler" EntitySet="Ürünler" />
+            <End Role="Satislar" EntitySet="Satislar" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Kategoriler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kategori" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Aciklama" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Markalar" Relationship="Stok_TakipModel.FK_Markalar_Kategoriler" FromRole="Kategoriler" ToRole="Markalar" />
+          <NavigationProperty Name="Ürünler" Relationship="Stok_TakipModel.FK_Ürünler_Kategoriler" FromRole="Kategoriler" ToRole="Ürünler" />
+        </EntityType>
+        <EntityType Name="Markalar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriID" Type="Int32" Nullable="false" />
+          <Property Name="Markalar1" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Aciklama" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Kategoriler" Relationship="Stok_TakipModel.FK_Markalar_Kategoriler" FromRole="Markalar" ToRole="Kategoriler" />
+          <NavigationProperty Name="Ürünler" Relationship="Stok_TakipModel.FK_Ürünler_Markalar" FromRole="Markalar" ToRole="Ürünler" />
+        </EntityType>
+        <EntityType Name="Ürünler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriID" Type="Int32" Nullable="false" />
+          <Property Name="MarkaID" Type="Int32" Nullable="false" />
+          <Property Name="BarkodNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UrunAdı" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AlisFiyat" Type="Decimal" Nullable="false" Precision="28" Scale="2" />
+          <Property Name="SatisFiyat" Type="Decimal" Nullable="false" Precision="28" Scale="2" />
+          <Property Name="Miktarı" Type="Decimal" Nullable="false" Precision="28" Scale="2" />
+          <Property Name="KDV" Type="Int32" Nullable="false" />
+          <Property Name="BirimID" Type="Int32" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Aciklama" Type="String" Nullable="false" MaxLength="850" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Birimler" Relationship="Stok_TakipModel.FK_Ürünler_Birimler" FromRole="Ürünler" ToRole="Birimler" />
+          <NavigationProperty Name="Kategoriler" Relationship="Stok_TakipModel.FK_Ürünler_Kategoriler" FromRole="Ürünler" ToRole="Kategoriler" />
+          <NavigationProperty Name="Markalar" Relationship="Stok_TakipModel.FK_Ürünler_Markalar" FromRole="Ürünler" ToRole="Markalar" />
+          <NavigationProperty Name="Sepet" Relationship="Stok_TakipModel.FK_Sepet_Ürünler" FromRole="Ürünler" ToRole="Sepet" />
+          <NavigationProperty Name="Satislar" Relationship="Stok_TakipModel.FK_Satislar_Ürünler" FromRole="Ürünler" ToRole="Satislar" />
+        </EntityType>
+        <Association Name="FK_Ürünler_Birimler">
+          <End Type="Stok_TakipModel.Birimler" Role="Birimler" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Stok_TakipModel.Ürünler" Role="Ürünler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Birimler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ürünler">
+              <PropertyRef Name="BirimID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Markalar_Kategoriler">
+          <End Type="Stok_TakipModel.Kategoriler" Role="Kategoriler" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Stok_TakipModel.Markalar" Role="Markalar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Markalar">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ürünler_Kategoriler">
+          <End Type="Stok_TakipModel.Kategoriler" Role="Kategoriler" Multiplicity="1" />
+          <End Type="Stok_TakipModel.Ürünler" Role="Ürünler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoriler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ürünler">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ürünler_Markalar">
+          <End Type="Stok_TakipModel.Markalar" Role="Markalar" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Stok_TakipModel.Ürünler" Role="Ürünler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markalar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ürünler">
+              <PropertyRef Name="MarkaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sepet_Ürünler">
+          <End Type="Stok_TakipModel.Ürünler" Role="Ürünler" Multiplicity="1" />
+          <End Type="Stok_TakipModel.Sepet" Role="Sepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ürünler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sepet">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Satislar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanıcıID" Type="Int32" Nullable="false" />
+          <Property Name="UrunID" Type="Int32" />
+          <Property Name="SepetID" Type="Int32" Nullable="false" />
+          <Property Name="BarkodNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BirimFiyat" Type="Decimal" Nullable="false" Precision="28" Scale="2" />
+          <Property Name="BirimMiktar" Type="Decimal" Nullable="false" Precision="28" Scale="2" />
+          <Property Name="ToplamFiyat" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="KDV" Type="Int32" Nullable="false" />
+          <Property Name="BirimID" Type="Int32" Nullable="false" />
+          <Property Name="Tarih" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Saat" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Kullanıcılar" Relationship="Stok_TakipModel.FK_Satislar_Kullanıcılar" FromRole="Satislar" ToRole="Kullanıcılar" />
+          <NavigationProperty Name="Ürünler" Relationship="Stok_TakipModel.FK_Satislar_Ürünler" FromRole="Satislar" ToRole="Ürünler" />
+        </EntityType>
+        <Association Name="FK_Satislar_Kullanıcılar">
+          <End Type="Stok_TakipModel.Kullanıcılar" Role="Kullanıcılar" Multiplicity="1" />
+          <End Type="Stok_TakipModel.Satislar" Role="Satislar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanıcılar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Satislar">
+              <PropertyRef Name="kullanıcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Satislar_Ürünler">
+          <End Type="Stok_TakipModel.Ürünler" Role="Ürünler" Multiplicity="0..1" />
+          <End Type="Stok_TakipModel.Satislar" Role="Satislar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ürünler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Satislar">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Stok_TakipModelStoreContainer" CdmEntityContainer="Stok_TakipEntities">
+          <EntitySetMapping Name="Birimler">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Birimler">
+              <MappingFragment StoreEntitySet="Birimler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Birim" ColumnName="Birim" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanıcılar">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Kullanıcılar">
+              <MappingFragment StoreEntitySet="Kullanıcılar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KullanıcıAdi" ColumnName="KullanıcıAdi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="AdiSoyadi" ColumnName="AdiSoyadi" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciRolleri">
+            <EntityTypeMapping TypeName="Stok_TakipModel.KullaniciRolleri">
+              <MappingFragment StoreEntitySet="KullaniciRolleri">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Müşteri">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Müşteri">
+              <MappingFragment StoreEntitySet="Müşteri">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Resim" ColumnName="Resim" />
+                <ScalarProperty Name="KayıtTarihi" ColumnName="KayıtTarihi" />
+                <ScalarProperty Name="Puani" ColumnName="Puani" />
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roller">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Roller">
+              <MappingFragment StoreEntitySet="Roller">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sepet">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Sepet">
+              <MappingFragment StoreEntitySet="Sepet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="AlisFiyat" ColumnName="AlisFiyat" />
+                <ScalarProperty Name="BirimMiktar" ColumnName="BirimMiktar" />
+                <ScalarProperty Name="ToplamFiyat" ColumnName="ToplamFiyat" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Saat" ColumnName="Saat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Stok_TakipModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoriler">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Kategoriler">
+              <MappingFragment StoreEntitySet="Kategoriler">
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Kategori" ColumnName="Kategori" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Markalar">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Markalar">
+              <MappingFragment StoreEntitySet="Markalar">
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Markalar1" ColumnName="Markalar1" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ürünler">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Ürünler">
+              <MappingFragment StoreEntitySet="Ürünler">
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="BirimID" ColumnName="BirimID" />
+                <ScalarProperty Name="KDV" ColumnName="KDV" />
+                <ScalarProperty Name="Miktarı" ColumnName="Miktarı" />
+                <ScalarProperty Name="SatisFiyat" ColumnName="SatisFiyat" />
+                <ScalarProperty Name="AlisFiyat" ColumnName="AlisFiyat" />
+                <ScalarProperty Name="UrunAdı" ColumnName="UrunAdı" />
+                <ScalarProperty Name="BarkodNo" ColumnName="BarkodNo" />
+                <ScalarProperty Name="MarkaID" ColumnName="MarkaID" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Satislar">
+            <EntityTypeMapping TypeName="Stok_TakipModel.Satislar">
+              <MappingFragment StoreEntitySet="Satislar">
+                <ScalarProperty Name="Saat" ColumnName="Saat" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="BirimID" ColumnName="BirimID" />
+                <ScalarProperty Name="KDV" ColumnName="KDV" />
+                <ScalarProperty Name="ToplamFiyat" ColumnName="ToplamFiyat" />
+                <ScalarProperty Name="BirimMiktar" ColumnName="BirimMiktar" />
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="BarkodNo" ColumnName="BarkodNo" />
+                <ScalarProperty Name="SepetID" ColumnName="SepetID" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,34 @@
+﻿@model  Stok_Takip.Models.Entity.Birimler
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<h2>Birim Ekleme Sayfası</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Ekle", "Birimler", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(x => x.ID)
+            @Html.LabelFor(x => x.Birim)
+            @Html.TextBoxFor(x => x.Birim, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Birim, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Aciklama)
+            @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Aciklama, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success">Birimi Ekle</button>
+        </div>
+    }
+</div>
+@section danger
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+

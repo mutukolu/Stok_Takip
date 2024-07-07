@@ -1,0 +1,36 @@
+﻿@model Stok_Takip.Models.Entity.Kategoriler
+
+@{
+    ViewBag.Title = "Ekle";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<h2>Kategori Ekleme</h2>
+<div class="container">
+    @using (Html.BeginForm("Ekle2", "Kategori", FormMethod.Post))
+    {
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Kategori)
+            @Html.TextBoxFor(x => x.Kategori, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Kategori, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Aciklama)
+            @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Aciklama, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success">Kategori Ekle</button>
+
+        </div>
+
+    }
+    </div>
+@section danger
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+

@@ -1,0 +1,80 @@
+﻿@using Stok_Takip.Models.Entity
+
+@model  List<Stok_Takip.Models.Entity.Birimler>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <div style="width: 20%;float:left">
+                @Html.TextBox("ara", null, new { @class = "form-control", @placeholder = "Birim adı" })
+            </div>
+        </div>
+        <div style="float: left;margin-left:5px">
+            @Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
+        </div>
+        <br />
+        <br />
+
+    }
+</div>
+
+<h2>Birim Sayfası</h2>
+
+<table class="table table-bordered" id="Birim">
+    <thead style="background-color:aliceblue">
+        <tr>
+            <th>ID</th>
+            <th>Birim</th>
+            <th>Açıklama</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.ID</th>
+                <td>@item.Birim</td>
+                <td>@item.Aciklama</td>
+                <td><input type="submit" name="btn" value="Sil" class="btn btn-danger btnSil" data-id="@item.ID" /></td>
+                <td><a href="/Birimler/GüncelleBilgiGetir/@item.ID" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+<a href="/Birimler/Ekle/" class="btn btn-success" style="margin-top:10px">Birim Ekle</a>
+
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#Birim").on("click", ".btnSil", function () {
+            var btn = $(this);
+            bootbox.confirm(btn.data("id") + " nolu ID kaydı silinsin mi?", function (result) {
+
+                if (result) {
+                    var id = btn.data("id");
+                    $.ajax({
+                        type: "POST",
+                        url: "/Birimler/Sil/",
+                        data: { id: id },
+                        success: function () {
+                            btn.parent().parent().remove();
+
+                        }
+                    });
+                }
+
+            });
+
+        });
+    });
+</script>

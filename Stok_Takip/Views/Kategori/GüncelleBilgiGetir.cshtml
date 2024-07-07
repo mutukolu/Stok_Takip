@@ -1,0 +1,32 @@
+﻿@model  Stok_Takip.Models.Entity.Kategoriler
+@{
+    ViewBag.Title = "GüncelleBilgiGetir";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<h2>Kategori Güncelleme Sayfası</h2>
+<div class="container">
+    <form action="/Kategori/Guncelle/">
+        @Html.HiddenFor(x => x.ID)
+        <div class="form-group">
+            @Html.LabelFor(x => x.Kategori)
+            @Html.TextBoxFor(x => x.Kategori, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Kategori, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Aciklama)
+            @Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Aciklama, "", new { @class = "text-danger" })
+        </div>
+        <div><button class="btn btn-warning">Kategori Güncelle</button> </div>
+    </form>
+</div>
+@section danger
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+
+

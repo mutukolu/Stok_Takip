@@ -1,0 +1,138 @@
+﻿@model  List<Stok_Takip.Models.Entity.Ürünler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <div style="width: 20%;float:left">
+                @Html.TextBox("ara", null, new { @class = "form-control",@placeholder = "Ürün veya marka adı" })
+            </div>
+        </div>
+        <div style="float: left;margin-left:5px">
+            @Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })
+        </div>
+        <br />
+        <br />
+ 
+     }
+</div>
+
+        <h2>Ürün Listesi</h2>
+        <table class="table table-bordered" id="urun">
+            <thead style="background-color:aliceblue">
+                <tr>
+                    @if (User.IsInRole("A"))
+                    {
+                        <th>ID</th>
+                        <th>Kategori</th>
+                        <th>Marka</th>
+                    }
+
+                    <th>Ürün Adı</th>
+
+                    @if (User.IsInRole("A"))
+                    {
+                        <th>Barkod No</th>
+                        <th>Alıs Fiyatı</th>
+                        <th>Satıs Fiyatı</th>
+                    }
+                    @if (User.IsInRole("C"))
+                    {
+
+                        <th>Fiyatı</th>
+                    }
+
+                    <th>Stok Sayısı</th>
+                    <th>Birim</th>
+
+                    @if (User.IsInRole("A"))
+                    {
+                        <th>K.D.V</th>
+                    }
+
+                    <th>Tarih</th>
+                    <th>Açıklama</th>
+
+                    @if (User.IsInRole("A"))
+                    {
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    }
+                    <th></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @if (User.IsInRole("A"))
+                        {
+                            <th>@Html.DisplayFor(x => item.ID)</th>
+                            <td>@Html.DisplayFor(x => item.Kategoriler.Kategori)</td>
+                            <td>@Html.DisplayFor(x => item.Markalar.Markalar1)</td>
+                        }
+                        <td>@Html.DisplayFor(x => item.UrunAdı)</td>
+
+                        @if (User.IsInRole("A"))
+                        {
+                            <td>@Html.DisplayFor(x => item.BarkodNo)</td>
+                            <td>@Html.DisplayFor(x => item.AlisFiyat)</td>
+                        }
+                        <td>@Html.DisplayFor(x => item.SatisFiyat)</td>
+
+                        <td>@Html.DisplayFor(x => item.Miktarı)</td>
+
+                        <td>@Html.DisplayFor(x => item.Birimler.Birim)</td>
+                        @if (User.IsInRole("A"))
+                        {
+                            <td>% @Html.DisplayFor(x => item.KDV)</td>
+                        }
+                        <td>@item.Tarih.ToString("dd.MM.yyyy")</td>
+                        <td>@Html.DisplayFor(x => item.Aciklama)</td>
+                        @if (User.IsInRole("A"))
+                        {
+                            <td><input type="submit" name="btn" value="Sil" class="btn btn-danger btnSil" data-id="@item.ID" /></td>
+                            <td> <a href="/Urunler/GüncelleBilgiGetir/@item.ID" class="btn btn-primary">Güncelle</a></td>
+                            <td> <a href="/Urunler/MiktarEkle/@item.ID" class="btn btn-info">Miktar Ekle</a></td>
+                        }
+                        <td>@Html.ActionLink("Sepete Ekle", "SepeteEkle", "Sepet", new { id = item.ID }, new { @class = "btn btn-warning" })</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (User.IsInRole("A"))
+        {
+            <a href="/Urunler/Ekle/" class="btn btn-success">Ürün Ekle</a>
+        }
+        <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#urun").on("click", ".btnSil", function () {
+                    var btn = $(this);
+                    bootbox.confirm(btn.data("id") + " nolu ID kaydı silinsin mi?", function (result) {
+
+                        if (result) {
+                            var id = btn.data("id");
+                            $.ajax({
+                                type: "GET",
+                                url: "/Urunler/Sil/",
+                                data: { id: id },
+                                success: function () {
+                                    btn.parent().parent().remove();
+
+                                }
+                            });
+                        }
+
+                    });
+
+                });
+            });
+        </script>
+

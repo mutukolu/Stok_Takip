@@ -1,0 +1,33 @@
+﻿@model  Stok_Takip.Models.Entity.Ürünler
+@{
+    ViewBag.Title = "MiktarEkle";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<h2>Ürün Miktar Ekleme listesi</h2>
+<div class="container">
+    @using (Html.BeginForm("MiktarEkle", "Urunler", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(x => x.ID)
+            @Html.TextBoxFor(x => x.ID, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Miktarı)
+            @Html.TextBoxFor(x => x.Miktarı, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Miktarı, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            <button class="btn btn-secondary">Miktar Ekle</button>
+        </div>
+    }
+
+</div>
+@section danger
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+

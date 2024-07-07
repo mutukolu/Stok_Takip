@@ -1,0 +1,125 @@
+﻿@model Stok_Takip.Models.Entity.Ürünler
+@{
+    ViewBag.Title = "GüncelleBilgiGetir";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<h2>Ürün Güncelleme Sayfası</h2>
+<div class="container">
+    @using (Html.BeginForm("Guncelle", "Urunler", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.ID)
+        <div class="form-group">
+            @Html.LabelFor(X => X.Kategoriler.Kategori)
+            @Html.DropDownListFor(x => x.KategoriID, Model.KategoriListesi, "---Seçiniz---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.KategoriID, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+
+            @Html.LabelFor(x => x.Markalar.Markalar1)
+           @Html.DropDownListFor(x => x.MarkaID, Model.MarkaListesi, "---Seçiniz---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.MarkaID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.UrunAdı)
+            @Html.TextBoxFor(x => x.UrunAdı, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.UrunAdı, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.BarkodNo)
+            @Html.TextBoxFor(x => x.BarkodNo, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.BarkodNo, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.AlisFiyat)
+            @Html.TextBoxFor(x => x.AlisFiyat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.AlisFiyat, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.SatisFiyat)
+            @Html.TextBoxFor(x => x.SatisFiyat, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.SatisFiyat, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Miktarı)
+            @Html.TextBoxFor(x => x.Miktarı, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Miktarı, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Birimler.Birim)
+            @Html.DropDownListFor(x => x.BirimID, Model.BirimListesi, "---Seçiniz---", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.BirimID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.KDV)
+            @Html.TextBoxFor(x => x.KDV, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.KDV, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Tarih)
+            @Html.TextBoxFor(x => x.Tarih, new { @class = "form-control", type = "date", @value=Model.Tarih.ToString("yyyy-MM-dd") })
+            @Html.ValidationMessageFor(x => x.Tarih, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Aciklama)
+            @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Aciklama, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            <button class="btn btn-primary">Ürün Güncelle</button>
+        </div>
+    }
+</div>
+   @section script
+{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#KategoriID").change(function () {
+
+                var ID = $("#KategoriID").val();
+                var markalist = $("#BirimID");
+                markalist.empty();
+                $.ajax({
+
+                    url: '/Urunler/GetMarka',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { 'id': ID },
+                    success: function (data) {
+                        $.each(data, function (index, option) {
+
+                            markalist.append('<option value=' + option.Value + '>' + option.Text + '<option')
+                        });
+                    }
+
+                });
+
+            });
+
+        });
+
+    </script>
+}
+@section danger
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/ondalik.js"></script>
+}
+
+
+
+    
+
